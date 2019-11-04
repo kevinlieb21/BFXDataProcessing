@@ -42,8 +42,7 @@ for i = 1:1:size(DataMatrix, 2)
     % Computation of overall SPL on specified range
     minindex = find(frequencies == controlData.minFreq);
     maxindex = find(frequencies == controlData.maxFreq);
-    OASPL = 0;
-    SPLPressure(isnan(SPLPressure))=0; 
+    OASPL = 0; 
     for j = minindex+1:1:maxindex-1
         OASPL = OASPL + (SPLPressure(j, controlData.micNumber))^2;
     end 
