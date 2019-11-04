@@ -25,12 +25,18 @@ for i = 1:1:size(DataMatrix, 2)
     SPLPressure = 2e-5*10.^(SPL./20);
     
     % Computation of SPG data
-    SPG = 20.*log10(Y(:,controlData.micNumber, :)./2e-5);
-    SPG = reshape(SPG, size(SPG,1), size(SPG, 3));
-    SPG = BFXArrayCalibration(frequencies, SPG, controlData);
+    SPGSPL = 20.*log10(Y(:,controlData.micNumber, :)./2e-5);
+    SPGSPL = reshape(SPGSPL, size(SPGSPL,1), size(SPGSPL, 3));
+    SPGSPL = BFXArrayCalibration(frequencies, SPGSPL, controlData);
+    
+    binWidth = fileInfo.sampleRate/controlData.transformLength;
+    
+    SPGPSD = 10.*log10(((Y(:,controlData.micNumber,:).^2)./(binWidth))./((2e-5.^2)));
+    SPGPSD = reshape(SPGPSD, size(SPGPSD,1), size(SPGPSD, 3));
+    SPGPSD = BFXArrayCalibration(frequencies, SPGPSD, controlData);
     
     % Compute PSD
-    binWidth = fileInfo.sampleRate/controlData.transformLength;
+    
     PSD = (Y.^2)./(binWidth);
     PSD = rms(PSD, 3);
     PSD = 10.*log10(PSD./((2e-5.^2)));
@@ -57,7 +63,8 @@ for i = 1:1:size(DataMatrix, 2)
     OutputMatrix{3,i} = SPL;
     OutputMatrix{4,i} = PSD;
     OutputMatrix{5,i} = OASPL;
-    OutputMatrix{6,i} = SPG;
+    OutputMatrix{6,i} = SPGSPL;
+    OutputMatrix{7,i} = SPGPSD;
     
 end
 

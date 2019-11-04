@@ -75,23 +75,43 @@ for i=1:1:size(OutputMatrix,2)
     
     if controlData.plotSpectrogram    
         % Spectrogram
-        figure;
-        [X, Y] = meshgrid(linspace(0,size(OutputMatrix{6,i},2)/(DataMatrix{1,i}.sampleRate/controlData.transformLength), size(OutputMatrix{6,i},2)), OutputMatrix{2,i});
-        surf(X, Y, OutputMatrix{6,i}, 'edgecolor', 'none');
-        titlestring = [OutputMatrix{1,i}.fileName, ' Mic ', num2str(controlData.micNumber), ' Spectrogram at TL=', num2str(controlData.transformLength)];
-        title(titlestring); xlabel('Time (s)'); ylabel('Frequency (Hz)');
-        c = colorbar;
-        c.Label.String = 'dB Re. 20uPa';
-        caxis(controlData.plotSize(3:4));
-        ylim(controlData.plotSize(1:2));
-        colormap jet;
-        view(2);
-        ax = gca;
-        ax.YRuler.Exponent = 0;
-        if controlData.savePlots
-                filestring = [OutputMatrix{1,i}.fileName, '_SPG_M', num2str(controlData.micNumber), '_TL', num2str(controlData.transformLength), controlData.format];
-                saveas(gcf, filestring);
-        end 
+        if controlData.outputType == 'SPL'
+            figure;
+            [X, Y] = meshgrid(linspace(0,size(OutputMatrix{6,i},2)/(DataMatrix{1,i}.sampleRate/controlData.transformLength), size(OutputMatrix{6,i},2)), OutputMatrix{2,i});
+            surf(X, Y, OutputMatrix{6,i}, 'edgecolor', 'none');
+            titlestring = [OutputMatrix{1,i}.fileName, ' Mic ', num2str(controlData.micNumber), ' Spectrogram at TL=', num2str(controlData.transformLength)];
+            title(titlestring); xlabel('Time (s)'); ylabel('Frequency (Hz)');
+            c = colorbar;
+            c.Label.String = 'dB Re. 20uPa';
+            caxis(controlData.plotSize(3:4));
+            ylim(controlData.plotSize(1:2));
+            colormap jet;
+            view(2);
+            ax = gca;
+            ax.YRuler.Exponent = 0;
+            if controlData.savePlots
+                    filestring = [OutputMatrix{1,i}.fileName, '_SPGSPL_M', num2str(controlData.micNumber), '_TL', num2str(controlData.transformLength), controlData.format];
+                    saveas(gcf, filestring);
+            end 
+        elseif controlData.outputType == 'PSD'
+            figure;
+            [X, Y] = meshgrid(linspace(0,size(OutputMatrix{7,i},2)/(DataMatrix{1,i}.sampleRate/controlData.transformLength), size(OutputMatrix{7,i},2)), OutputMatrix{2,i});
+            surf(X, Y, OutputMatrix{7,i}, 'edgecolor', 'none');
+            titlestring = [OutputMatrix{1,i}.fileName, ' Mic ', num2str(controlData.micNumber), ' Spectrogram at TL=', num2str(controlData.transformLength)];
+            title(titlestring); xlabel('Time (s)'); ylabel('Frequency (Hz)');
+            c = colorbar;
+            c.Label.String = 'dB Re. 20uPa^2/Hz';
+            caxis(controlData.plotSize(3:4));
+            ylim(controlData.plotSize(1:2));
+            colormap jet;
+            view(2);
+            ax = gca;
+            ax.YRuler.Exponent = 0;
+            if controlData.savePlots
+                    filestring = [OutputMatrix{1,i}.fileName, '_SPGPSD_M', num2str(controlData.micNumber), '_TL', num2str(controlData.transformLength), controlData.format];
+                    saveas(gcf, filestring);
+            end  
+        end
     end
 end
 end

@@ -43,7 +43,7 @@ controlData.outputType = 'SPL';
 controlData.micNumber = 18;
 
 % Desired transform length for computation
-controlData.transformLength = 8192;
+controlData.transformLength = 2048;
 
 % Excel Output Controls
 controlData.excelSingleMic = 0;
@@ -52,8 +52,8 @@ controlData.excelAllMics = 0;
 % Plotting Controls
 controlData.plotSpectrogram = 1;
 controlData.plotSingleMic = 1;
-controlData.plotAllMics = 1;
-controlData.savePlots = 0;
+controlData.plotAllMics = 0;
+controlData.savePlots = 1;
 controlData.plotSize = [0 20000 0 70];
 controlData.format = '.png';
 
