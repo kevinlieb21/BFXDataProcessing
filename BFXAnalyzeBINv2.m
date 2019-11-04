@@ -17,7 +17,7 @@
 
 
 % Written by Kevin Lieb at MAESTRO Laboratory, Texas A&M University.
-% Revision Date: July 24, 2019
+% Revision Date: November 4, 2019
 
 % To use the software, set control values in the Initial Setup Values
 % section. This includes the desired output type (applies to both Excel and
