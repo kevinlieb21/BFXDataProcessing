@@ -30,7 +30,7 @@ if controlData.excelAllMics
 end
 
 if controlData.excelSingleMic
-    clear outputTable
+    clear outputTable varstring
     varstring = cell(1,size(OutputMatrix,2)+1);
     varstring{1} = char('Frequency');
     if size(OutputMatrix, 2) == 1
@@ -63,7 +63,7 @@ if controlData.OASPL
     else
        fullfilename = ['Multi_', OAFileString, '.xlsx'];
     end
-    clear outputTable
+    clear outputTable varstring
     
     for i = 1:1:size(OutputMatrix,2)
          varstring{i} = regexprep(OutputMatrix{1,i}.fileName, '( |\.)', '_');
